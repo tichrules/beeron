@@ -1,0 +1,29 @@
+<assembly
+	xsi:schemaLocation="http://maven.apache.org/xsd/assembly-1.0.0.xsd http://maven.apache.org/xsd/assembly-1.0.0.xsd">
+	<id>distribution</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+<!--	
+		<fileSet>
+			<includes>
+				<include>db/*</include>
+				<include>*.dll</include>
+			</includes>
+			<filtered>false</filtered>
+		</fileSet>
+		<fileSet>
+			<includes>
+				<include>**/*</include>
+			</includes>
+			<excludes>
+				<exclude>**/*.zip</exclude>
+				<exclude>db/*</exclude>
+			</excludes>
+			<filtered>true</filtered>
+		</fileSet>
+-->		
+	</fileSets>
+</assembly>
