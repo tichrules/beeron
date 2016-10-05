@@ -14,16 +14,15 @@
 			</includes>
 			<filtered>false</filtered>
 		</fileSet>
+-->		
 		<fileSet>
 			<includes>
 				<include>**/*</include>
 			</includes>
 			<excludes>
 				<exclude>**/*.zip</exclude>
-				<exclude>db/*</exclude>
 			</excludes>
 			<filtered>true</filtered>
 		</fileSet>
--->		
 	</fileSets>
 </assembly>
