@@ -1,0 +1,8 @@
+**/.*project
+**/.*path
+**/target/*
+fellas/*
+.metadata/*
+RemoteSystemsTempFiles/*
+**/.settings/*
+.recommenders
