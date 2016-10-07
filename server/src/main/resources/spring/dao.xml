@@ -5,7 +5,6 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="ragnarDao" class="beeron.ragnar.server.impl.RagnarDaoImpl">
-		<constructor-arg ref="ragnarJdbcTemplate" />
 	</bean>
 
 </beans>
