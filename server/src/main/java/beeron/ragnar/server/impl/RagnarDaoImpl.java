@@ -26,8 +26,8 @@ public class RagnarDaoImpl implements RagnarDao {
 	 * @see beeron.ragnar.common.RagnarDao#getRagnar()
 	 */
 	@Override
-	public String getRagnar() {
+	public int getRagnar() {
 		int count = jdbcOperations.queryForObject("SELECT COUNT(*) FROM TEST", Integer.class);
-		return "Ragnar " + count;
+		return count;
 	}
 }
