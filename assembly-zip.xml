@@ -6,23 +6,21 @@
 	</formats>
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<fileSets>
-<!--	
-		<fileSet>
-			<includes>
-				<include>db/*</include>
-				<include>*.dll</include>
-			</includes>
-			<filtered>false</filtered>
-		</fileSet>
--->		
 		<fileSet>
 			<includes>
 				<include>**/*</include>
 			</includes>
 			<excludes>
 				<exclude>**/*.zip</exclude>
+				<exclude>target/**/*</exclude>
+				<exclude>.settings/*</exclude>				
+				<exclude>assembly-zip.xml</exclude>
+				<exclude>pom.xml</exclude>				
+				<exclude>.gitignore</exclude>				
 			</excludes>
 			<filtered>true</filtered>
 		</fileSet>
 	</fileSets>
+	<!-- <fileSets> <fileSet> <includes> <include>**/*</include> </includes> 
+		<excludes> <exclude>**/*.zip</exclude> </excludes> </fileSet> </fileSets> -->
 </assembly>
