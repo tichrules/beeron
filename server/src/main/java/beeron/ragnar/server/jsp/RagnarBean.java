@@ -13,7 +13,7 @@ public class RagnarBean extends AbstractBean {
 	}
 
 	public String getRagnar() {
-		return "Ragnar " + ragnarDao.getRagnar();
+		return "Ragnar is " + ragnarDao.getRagnar();
 	}
 
 }
