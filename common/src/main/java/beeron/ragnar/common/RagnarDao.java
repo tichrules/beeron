@@ -1,6 +1,8 @@
 package beeron.ragnar.common;
 
+import java.util.List;
+
 public interface RagnarDao {
 
-	String getRagnar();
+	List<Person> getPeople();
 }

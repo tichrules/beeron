@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 import beeron.ragnar.common.Person;
 
-@Entity
+@Entity(name = "PERSON")
 @Table(name = "PERSON")
 public class PersonImpl implements Person {
 
