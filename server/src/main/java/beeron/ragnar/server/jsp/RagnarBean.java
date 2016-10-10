@@ -2,17 +2,19 @@ package beeron.ragnar.server.jsp;
 
 import java.util.List;
 
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import beeron.ragnar.common.Person;
 import beeron.ragnar.common.RagnarDao;
 
-public class RagnarBean extends AbstractBean {
+public class RagnarBean {
 
 	private RagnarDao ragnarDao;
 
 	public RagnarBean() throws NamingException {
-		ragnarDao = context.getBean(RagnarDao.class);
+		InitialContext context = new InitialContext();
+		ragnarDao = (RagnarDao) context.lookup("java:module/RagnarDaoImpl");
 	}
 
 	public List<Person> getPeople() {
