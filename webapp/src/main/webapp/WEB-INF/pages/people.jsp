@@ -6,10 +6,11 @@
 	<table>
 		<c:forEach items="${people}" var="person">
 			<tr>
-				<td>${person.name}</td>
+				<td><a href="person/${person.name}">${person.name}</a></td>
 				<td>${person.acting}/10</td>
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="create">Create</a>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package beeron.ragnar.server.impl;
+package beeron.ragnar.server.impl.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,7 +8,7 @@ import beeron.ragnar.common.Person;
 
 @Entity(name = "PERSON")
 @Table(name = "PERSON")
-public class PersonImpl implements Person {
+public class PersonEntity implements Person {
 
 	@Id
 	private String name;
@@ -30,4 +30,11 @@ public class PersonImpl implements Person {
 		return acting;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setActing(int acting) {
+		this.acting = acting;
+	}
 }

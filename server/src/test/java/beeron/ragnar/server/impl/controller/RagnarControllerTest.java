@@ -23,6 +23,6 @@ public class RagnarControllerTest {
 
 	@Test
 	public void testRagnar() {
-		ragnarController.ragnar(model);
+		ragnarController.getAll(model);
 	}
 }
