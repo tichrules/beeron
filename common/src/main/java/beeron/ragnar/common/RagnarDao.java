@@ -8,5 +8,8 @@ public interface RagnarDao {
 
 	Person getPerson(String name);
 
-	void insertPerson(Person person);
+	void insertPerson(Person person) throws DaoException;
+
+	void deletePerson(String name) throws DaoException;
+
 }

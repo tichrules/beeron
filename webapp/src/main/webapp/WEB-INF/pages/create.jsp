@@ -2,7 +2,7 @@
 <body bgcolor="white">
 	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-	<spring:url value="/users" var="actionUrl" />
+	<spring:url value="/ragnar/people" var="actionUrl" />
 	<form:form method="post" modelAttribute="personForm"
 		action="${actionUrl}">
 		<p>

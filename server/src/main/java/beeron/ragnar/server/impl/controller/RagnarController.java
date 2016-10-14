@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import beeron.ragnar.common.RagnarDao;
 import beeron.ragnar.server.impl.form.PersonForm;
@@ -42,9 +43,25 @@ public class RagnarController {
 	}
 
 	@RequestMapping(path = "/people", method = RequestMethod.POST)
-	public String add(@ModelAttribute PersonForm personForm) {
-		ragnarDao.insertPerson(personForm);
-		return "person/" + personForm.getName();
+	public String add(@ModelAttribute PersonForm personForm, Model model) {
+		try {
+			ragnarDao.insertPerson(personForm);
+			return "redirect:/ragnar/person/" + personForm.getName();
+		} catch (Exception e) {
+			model.addAttribute("message", e.getMessage());
+			return "error";
+		}
+	}
+
+	@RequestMapping(path = "/people/delete", method = RequestMethod.POST)
+	public String delete(@RequestParam String name, Model model) {
+		try {
+			ragnarDao.deletePerson(name);
+			return "redirect:/ragnar/people";
+		} catch (Exception e) {
+			model.addAttribute("message", e.getMessage());
+			return "error";
+		}
 	}
 
 }
