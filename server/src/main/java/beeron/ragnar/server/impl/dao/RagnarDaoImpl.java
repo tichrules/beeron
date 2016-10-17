@@ -3,24 +3,29 @@ package beeron.ragnar.server.impl.dao;
 import java.util.Collections;
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import beeron.ragnar.common.DaoException;
 import beeron.ragnar.common.Person;
 import beeron.ragnar.common.RagnarDao;
 import beeron.ragnar.server.impl.entity.PersonEntity;
 
-@Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
+@Repository
+@Transactional
 public class RagnarDaoImpl implements RagnarDao {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	public RagnarDaoImpl(EntityManagerFactory entityManagerFactory) {
+		entityManager = entityManagerFactory.createEntityManager();
+	}
 
 	/**
 	 * @see beeron.ragnar.common.RagnarDao#getPeople()

@@ -3,9 +3,10 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 
-	<persistence-unit name="Ragnar" transaction-type="JTA">
+	<persistence-unit name="Ragnar" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/RagnarDS</jta-data-source>
+		<class>beeron.ragnar.server.impl.entity.PersonEntity</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect" />
 			<property name="hibernate.show_sql" value="true" />
