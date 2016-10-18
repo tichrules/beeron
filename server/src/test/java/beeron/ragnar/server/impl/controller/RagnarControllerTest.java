@@ -5,20 +5,20 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.ui.Model;
 
-import beeron.ragnar.common.RagnarDao;
+import beeron.ragnar.common.RagnarService;
 
 public class RagnarControllerTest {
 
 	private RagnarController ragnarController;
 
-	private RagnarDao ragnarDao;
+	private RagnarService ragnarService;
 	private Model model;
 
 	@Before
 	public void setup() {
-		ragnarDao = Mockito.mock(RagnarDao.class);
+		ragnarService = Mockito.mock(RagnarService.class);
 		model = Mockito.mock(Model.class);
-		ragnarController = new RagnarController(ragnarDao);
+		ragnarController = new RagnarController(ragnarService);
 	}
 
 	@Test

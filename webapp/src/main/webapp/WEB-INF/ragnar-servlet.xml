@@ -33,8 +33,12 @@
 		<constructor-arg ref="emf" />
 	</bean>
 
-	<bean class="beeron.ragnar.server.impl.controller.RagnarController">
+	<bean id="ragnarService" class="beeron.ragnar.server.impl.service.RagnarServiceImpl">
 		<constructor-arg ref="ragnarDao" />
+	</bean>
+
+	<bean class="beeron.ragnar.server.impl.controller.RagnarController">
+		<constructor-arg ref="ragnarService" />
 	</bean>
 
 	<bean id="viewResolver"

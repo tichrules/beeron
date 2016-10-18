@@ -6,18 +6,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import beeron.ragnar.common.DaoException;
 import beeron.ragnar.common.Person;
 import beeron.ragnar.common.RagnarDao;
 import beeron.ragnar.server.impl.entity.PersonEntity;
 
 @Repository
-@Transactional
 public class RagnarDaoImpl implements RagnarDao {
 
 	@PersistenceContext
@@ -47,29 +43,20 @@ public class RagnarDaoImpl implements RagnarDao {
 	 * @see beeron.ragnar.common.RagnarDao#insertPerson(beeron.ragnar.common.Person)
 	 */
 	@Override
-	public void insertPerson(Person person) throws DaoException {
-		try {
-			PersonEntity personEntity = new PersonEntity();
-			personEntity.setName(person.getName());
-			personEntity.setActing(person.getActing());
-			entityManager.persist(personEntity);
-			entityManager.flush();
-		} catch (PersistenceException e) {
-			throw new DaoException(e.getCause());
-		}
+	public void insertPerson(Person person) {
+		PersonEntity personEntity = new PersonEntity();
+		personEntity.setName(person.getName());
+		personEntity.setActing(person.getActing());
+		entityManager.persist(personEntity);
 	}
 
 	/**
 	 * @see beeron.ragnar.common.RagnarDao#deletePerson(java.lang.String)
 	 */
 	@Override
-	public void deletePerson(String name) throws DaoException {
-		try {
-			PersonEntity personEntity = entityManager.find(PersonEntity.class, name);
-			entityManager.remove(personEntity);
-			entityManager.flush();
-		} catch (PersistenceException e) {
-			throw new DaoException(e.getCause());
-		}
+	public void deletePerson(String name) {
+		PersonEntity personEntity = entityManager.find(PersonEntity.class, name);
+		entityManager.remove(personEntity);
+		entityManager.flush();
 	}
 }
