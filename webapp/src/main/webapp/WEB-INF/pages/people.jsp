@@ -10,9 +10,9 @@
 		<table>
 			<c:forEach items="${people}" var="person">
 				<tr>
-					<td><a href="person/${person.name}">${person.name}</a></td>
+					<td><a href="person/${person.id}">${person.name}</a></td>
 					<td>${person.acting}/10</td>
-					<td><button type="submit" name="name" value="${person.name}">Delete</button></td>
+					<td><button type="submit" name="id" value="${person.id}">Delete</button></td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -6,10 +6,10 @@ public interface RagnarService {
 
 	List<Person> getPeople();
 
-	Person getPerson(String name);
+	Person getPerson(int id);
 
-	void insertPerson(Person person);
+	int insertPerson(Person person);
 
-	void deletePerson(String name);
+	void deletePerson(int id);
 
 }

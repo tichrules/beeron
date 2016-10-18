@@ -23,9 +23,9 @@ public class RagnarServiceTest {
 
 	@Test
 	public void testRagnar() {
-		ragnarService.deletePerson("Floki");
+		ragnarService.deletePerson(1);
 		ragnarService.insertPerson(new PersonEntity());
 		ragnarService.getPeople();
-		ragnarService.getPerson("Ragnar");
+		ragnarService.getPerson(1);
 	}
 }

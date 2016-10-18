@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 
 	<context:annotation-config />
-	<context:component-scan base-package="beeron.ragnar.server.impl.dao" />
+	<context:component-scan base-package="beeron.ragnar.server.impl" />
 
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
@@ -30,17 +30,13 @@
 	<tx:annotation-driven transaction-manager="txManager" />
 
 	<bean id="ragnarDao" class="beeron.ragnar.server.impl.dao.RagnarDaoImpl">
-		<constructor-arg ref="emf" />
 	</bean>
 
 	<bean id="ragnarService" class="beeron.ragnar.server.impl.service.RagnarServiceImpl">
 		<constructor-arg ref="ragnarDao" />
 	</bean>
-
-	<bean class="beeron.ragnar.server.impl.controller.RagnarController">
-		<constructor-arg ref="ragnarService" />
-	</bean>
-
+	<!-- <bean class="beeron.ragnar.server.impl.controller.RagnarController"> 
+		<constructor-arg ref="ragnarService" /> </bean> -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

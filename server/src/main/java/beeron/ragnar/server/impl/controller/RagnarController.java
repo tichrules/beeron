@@ -29,9 +29,9 @@ public class RagnarController {
 		return "people";
 	}
 
-	@RequestMapping(path = "/person/{name}", method = RequestMethod.GET)
-	public String get(@PathVariable String name, Model model) {
-		model.addAttribute("person", ragnarService.getPerson(name));
+	@RequestMapping(path = "/person/{id}", method = RequestMethod.GET)
+	public String get(@PathVariable int id, Model model) {
+		model.addAttribute("person", ragnarService.getPerson(id));
 		return "person";
 	}
 
@@ -43,24 +43,14 @@ public class RagnarController {
 
 	@RequestMapping(path = "/people", method = RequestMethod.POST)
 	public String add(@ModelAttribute PersonForm personForm, Model model) {
-		// try {
-		ragnarService.insertPerson(personForm);
-		return "redirect:/ragnar/person/" + personForm.getName();
-		// } catch (Exception e) {
-		// model.addAttribute("message", e.getMessage());
-		// return "error";
-		// }
+		int id = ragnarService.insertPerson(personForm);
+		return "redirect:/ragnar/person/" + id;
 	}
 
 	@RequestMapping(path = "/people/delete", method = RequestMethod.POST)
-	public String delete(@RequestParam String name, Model model) {
-		// try {
-		ragnarService.deletePerson(name);
+	public String delete(@RequestParam int id, Model model) {
+		ragnarService.deletePerson(id);
 		return "redirect:/ragnar/people";
-		// } catch (Exception e) {
-		// model.addAttribute("message", e.getMessage());
-		// return "error";
-		// }
 	}
 
 	@ExceptionHandler(Exception.class)
