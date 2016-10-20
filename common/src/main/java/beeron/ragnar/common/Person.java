@@ -8,5 +8,5 @@ public interface Person {
 
 	int getActing();
 
-	Set<? extends Location> getLocations();
+	Set<Location> getLocations();
 }

@@ -23,7 +23,7 @@ public class PersonForm implements Person {
 	 * @see beeron.ragnar.common.Person#getLocations()
 	 */
 	@Override
-	public Set<? extends Location> getLocations() {
+	public Set<Location> getLocations() {
 		return Collections.<Location>emptySet();
 	}
 

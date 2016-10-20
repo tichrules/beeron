@@ -42,6 +42,7 @@ public class RagnarDaoImpl implements RagnarDao {
 		PersonEntity personEntity = new PersonEntity();
 		personEntity.setName(person.getName());
 		personEntity.setActing(person.getActing());
+		personEntity.setLocations(person.getLocations());
 		entityManager.persist(personEntity);
 		return personEntity.getId();
 	}

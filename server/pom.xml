@@ -81,6 +81,7 @@
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
 			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.arquillian</groupId>
@@ -105,6 +106,7 @@
 			<groupId>org.jboss.arquillian.extension</groupId>
 			<artifactId>arquillian-service-deployer-spring-3</artifactId>
 			<version>1.0.0.Beta3</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.arquillian.extension</groupId>
@@ -116,6 +118,12 @@
 			<groupId>org.jboss.shrinkwrap.resolver</groupId>
 			<artifactId>shrinkwrap-resolver-api-maven</artifactId>
 			<version>2.2.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>2.4.9</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>

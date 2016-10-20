@@ -1,6 +1,7 @@
 package beeron.ragnar.server.impl.entity;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -31,10 +32,10 @@ public class PersonEntity implements PersistentPerson {
 	private Integer id;
 	private String name;
 	private int acting;
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH }, fetch = FetchType.EAGER)
 	@JoinTable(name = "PERSON_WAS_IN_LOCATION", joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "LOCATION_ID", referencedColumnName = "ID"))
 	@Fetch(FetchMode.SUBSELECT)
-	private Set<LocationEntity> locations;
+	private Set<LocationEntity> locations = new HashSet<LocationEntity>();
 
 	/**
 	 * 
@@ -65,8 +66,17 @@ public class PersonEntity implements PersistentPerson {
 	 * @see beeron.ragnar.common.Person#getLocations()
 	 */
 	@Override
-	public Set<? extends Location> getLocations() {
+	public Set<Location> getLocations() {
 		return Collections.unmodifiableSet(locations);
+	}
+
+	public void setLocations(Set<Location> locations) {
+		this.locations.clear();
+		for (Location location : locations) {
+			LocationEntity locationEntity = new LocationEntity();
+			locationEntity.setName(location.getName());
+			this.locations.add(locationEntity);
+		}
 	}
 
 	public void setName(String name) {
