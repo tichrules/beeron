@@ -1,4 +1,4 @@
-package beeron.ragnar.server.impl.controller;
+package beeron.ragnar.server.impl.service;
 
 import org.junit.Before;
 import org.junit.Test;

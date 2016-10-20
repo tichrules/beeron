@@ -1,12 +1,24 @@
 package beeron.ragnar.server.impl.entity;
 
+import java.util.Collections;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import beeron.ragnar.common.Location;
 import beeron.ragnar.common.PersistentPerson;
 
 @Entity(name = "PERSON")
@@ -19,6 +31,10 @@ public class PersonEntity implements PersistentPerson {
 	private Integer id;
 	private String name;
 	private int acting;
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@JoinTable(name = "PERSON_WAS_IN_LOCATION", joinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "LOCATION_ID", referencedColumnName = "ID"))
+	@Fetch(FetchMode.SUBSELECT)
+	private Set<LocationEntity> locations;
 
 	/**
 	 * 
@@ -43,6 +59,14 @@ public class PersonEntity implements PersistentPerson {
 	@Override
 	public int getActing() {
 		return acting;
+	}
+
+	/**
+	 * @see beeron.ragnar.common.Person#getLocations()
+	 */
+	@Override
+	public Set<? extends Location> getLocations() {
+		return Collections.unmodifiableSet(locations);
 	}
 
 	public void setName(String name) {

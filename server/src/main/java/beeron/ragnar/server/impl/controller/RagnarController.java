@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import beeron.ragnar.common.Person;
 import beeron.ragnar.common.RagnarService;
 import beeron.ragnar.server.impl.form.PersonForm;
 
@@ -31,7 +32,9 @@ public class RagnarController {
 
 	@RequestMapping(path = "/person/{id}", method = RequestMethod.GET)
 	public String get(@PathVariable int id, Model model) {
-		model.addAttribute("person", ragnarService.getPerson(id));
+		Person person = ragnarService.getPerson(id);
+		model.addAttribute("person", person);
+		model.addAttribute("locations", person.getLocations());
 		return "person";
 	}
 

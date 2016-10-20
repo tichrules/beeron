@@ -3,12 +3,14 @@ package beeron.ragnar.server.impl.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import beeron.ragnar.common.Person;
 import beeron.ragnar.common.RagnarDao;
 import beeron.ragnar.common.RagnarService;
 
 @Service
+@Transactional
 public class RagnarServiceImpl implements RagnarService {
 
 	private RagnarDao ragnarDao;
