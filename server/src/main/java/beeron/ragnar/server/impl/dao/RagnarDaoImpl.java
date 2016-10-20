@@ -3,11 +3,8 @@ package beeron.ragnar.server.impl.dao;
 import java.util.Collections;
 import java.util.List;
 
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,8 +13,6 @@ import beeron.ragnar.common.RagnarDao;
 import beeron.ragnar.server.impl.entity.PersonEntity;
 
 @Repository
-@Transactional
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class RagnarDaoImpl implements RagnarDao {
 
 	@PersistenceContext(unitName = "Ragnar")
