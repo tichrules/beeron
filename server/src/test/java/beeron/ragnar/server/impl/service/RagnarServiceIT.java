@@ -19,8 +19,8 @@ import beeron.ragnar.common.Location;
 import beeron.ragnar.common.PersistentLocation;
 import beeron.ragnar.common.PersistentPerson;
 import beeron.ragnar.common.Person;
-import beeron.ragnar.common.RagnarDao;
 import beeron.ragnar.common.RagnarService;
+import beeron.ragnar.server.RagnarDao;
 import beeron.ragnar.server.impl.dao.RagnarDaoImpl;
 import beeron.ragnar.server.impl.entity.LocationEntity;
 import beeron.ragnar.server.impl.entity.PersonEntity;
@@ -29,9 +29,9 @@ import beeron.ragnar.server.impl.entity.PersonEntity;
 @SpringConfiguration("test.xml")
 public class RagnarServiceIT {
 
-	private static final String TEST_LOC = "Test Location";
-	private static final String TEST_PERSON_NAME = "Test Person";
-	private static final int TEST_PERSON_ACTING = 5;
+	private static final String LOCATION_NAME = "Test Location";
+	private static final String PERSON_NAME = "Test Person";
+	private static final int PERSON_ACTING = 5;
 
 	private PersonEntity testPerson;
 	private LocationEntity testLocation;
@@ -39,10 +39,10 @@ public class RagnarServiceIT {
 	@Before
 	public void setup() {
 		testLocation = new LocationEntity();
-		testLocation.setName(TEST_LOC);
+		testLocation.setName(LOCATION_NAME);
 		testPerson = new PersonEntity();
-		testPerson.setName(TEST_PERSON_NAME);
-		testPerson.setActing(TEST_PERSON_ACTING);
+		testPerson.setName(PERSON_NAME);
+		testPerson.setActing(PERSON_ACTING);
 		testPerson.setLocations(Collections.singleton(testLocation));
 
 	}
@@ -62,34 +62,43 @@ public class RagnarServiceIT {
 
 	@Test
 	public void testGetInsertDelete() {
-		int countBefore = ragnarService.getPeople().size();
-		int id = ragnarService.insertPerson(testPerson);
-		int countAfter = ragnarService.getPeople().size();
-		Assert.assertEquals(countAfter, countBefore + 1);
-		Person person = ragnarService.getPerson(id);
-		Assert.assertNotNull(person);
-		Assert.assertEquals(person.getName(), TEST_PERSON_NAME);
-		Assert.assertEquals(person.getActing(), TEST_PERSON_ACTING);
-		Assert.assertEquals(person.getLocations().size(), 1);
-		Location location = person.getLocations().iterator().next();
-		Assert.assertEquals(location.getName(), TEST_LOC);
-		ragnarService.deletePerson(id);
-		countAfter = ragnarService.getPeople().size();
-		Assert.assertEquals(countAfter, countBefore);
-		person = ragnarService.getPerson(id);
-		Assert.assertNull(person);
+		try {
+			int countBefore = ragnarService.getPeople().size();
+			int id = ragnarService.insertPerson(testPerson);
+			int countAfter = ragnarService.getPeople().size();
+			Assert.assertEquals(countAfter, countBefore + 1);
+			Person person = ragnarService.getPerson(id);
+			Assert.assertNotNull(person);
+			Assert.assertEquals(person.getName(), PERSON_NAME);
+			Assert.assertEquals(person.getActing(), PERSON_ACTING);
+			Assert.assertEquals(person.getLocations().size(), 1);
+			Location location = person.getLocations().iterator().next();
+			Assert.assertEquals(location.getName(), LOCATION_NAME);
+			ragnarService.deletePerson(id);
+			countAfter = ragnarService.getPeople().size();
+			Assert.assertEquals(countAfter, countBefore);
+			person = ragnarService.getPerson(id);
+			Assert.assertNull(person);
+		} finally {
+			ragnarService.deletePerson(PERSON_NAME);
+			ragnarService.deleteLocation(LOCATION_NAME);
+		}
 	}
 
 	@Test(expected = DataIntegrityViolationException.class)
 	public void testInsertDuplicate() {
-		Integer id = null;
 		try {
-			id = ragnarService.insertPerson(testPerson);
+			ragnarService.insertPerson(testPerson);
 			ragnarService.insertPerson(testPerson);
 		} finally {
-			if (id != null) {
-				ragnarService.deletePerson(id);
-			}
+			ragnarService.deletePerson(PERSON_NAME);
+			ragnarService.deleteLocation(LOCATION_NAME);
 		}
+	}
+
+	@Test
+	public void testMostPopularLocation() {
+		Location location = ragnarService.getMostPopularLocation();
+		Assert.assertNotNull(location);
 	}
 }

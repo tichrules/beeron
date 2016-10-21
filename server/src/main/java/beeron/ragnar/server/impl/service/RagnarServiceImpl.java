@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import beeron.ragnar.common.Location;
 import beeron.ragnar.common.Person;
-import beeron.ragnar.common.RagnarDao;
 import beeron.ragnar.common.RagnarService;
+import beeron.ragnar.server.RagnarDao;
 
 @Service
 @Transactional
@@ -49,6 +50,30 @@ public class RagnarServiceImpl implements RagnarService {
 	@Override
 	public int insertPerson(Person person) {
 		return ragnarDao.insertPerson(person);
+	}
+
+	/**
+	 * @see beeron.ragnar.common.RagnarService#deletePerson(java.lang.String)
+	 */
+	@Override
+	public void deletePerson(String name) {
+		ragnarDao.deletePerson(name);
+	}
+
+	/**
+	 * @see beeron.ragnar.common.RagnarService#getMostPopularLocation()
+	 */
+	@Override
+	public Location getMostPopularLocation() {
+		return ragnarDao.getMostPopularLocation();
+	}
+
+	/**
+	 * @see beeron.ragnar.common.RagnarService#deleteLocation(java.lang.String)
+	 */
+	@Override
+	public void deleteLocation(String name) {
+		ragnarDao.deleteLocation(name);
 	}
 
 }

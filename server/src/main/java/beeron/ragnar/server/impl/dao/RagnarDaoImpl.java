@@ -8,8 +8,10 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import beeron.ragnar.common.Location;
 import beeron.ragnar.common.Person;
-import beeron.ragnar.common.RagnarDao;
+import beeron.ragnar.server.RagnarDao;
+import beeron.ragnar.server.impl.entity.LocationEntity;
 import beeron.ragnar.server.impl.entity.PersonEntity;
 
 @Repository
@@ -18,8 +20,15 @@ public class RagnarDaoImpl implements RagnarDao {
 	@PersistenceContext(unitName = "Ragnar")
 	private EntityManager entityManager;
 
+	private static <T> T getSingleResult(List<T> list) {
+		if (list.isEmpty()) {
+			return null;
+		}
+		return list.get(0);
+	}
+
 	/**
-	 * @see beeron.ragnar.common.RagnarDao#getPeople()
+	 * @see beeron.ragnar.server.RagnarDao#getPeople()
 	 */
 	@Override
 	public List<Person> getPeople() {
@@ -35,7 +44,7 @@ public class RagnarDaoImpl implements RagnarDao {
 	}
 
 	/**
-	 * @see beeron.ragnar.common.RagnarDao#insertPerson(beeron.ragnar.common.Person)
+	 * @see beeron.ragnar.server.RagnarDao#insertPerson(beeron.ragnar.common.Person)
 	 */
 	@Override
 	public int insertPerson(Person person) {
@@ -54,5 +63,36 @@ public class RagnarDaoImpl implements RagnarDao {
 	public void deletePerson(int id) {
 		PersonEntity personEntity = entityManager.find(PersonEntity.class, id);
 		entityManager.remove(personEntity);
+	}
+
+	/**
+	 * @see beeron.ragnar.common.RagnarService#deletePerson(java.lang.String)
+	 */
+	@Override
+	public void deletePerson(String name) {
+		PersonEntity personEntity = getSingleResult(entityManager.createNamedQuery("Person.findByName", PersonEntity.class).setParameter("NAME", name).getResultList());
+		if (personEntity != null) {
+			entityManager.remove(personEntity);
+		}
+	}
+
+	/**
+	 * @see beeron.ragnar.common.RagnarService#getMostPopularLocation()
+	 */
+	@Override
+	public Location getMostPopularLocation() {
+		LocationEntity locationEntity = (LocationEntity) entityManager.createNamedQuery("Location.findMostPopular").getSingleResult();
+		return locationEntity;
+	}
+
+	/**
+	 * @see beeron.ragnar.common.RagnarService#deleteLocation(java.lang.String)
+	 */
+	@Override
+	public void deleteLocation(String name) {
+		LocationEntity locationEntity = getSingleResult(entityManager.createNamedQuery("Location.findByName", LocationEntity.class).setParameter("NAME", name).getResultList());
+		if (locationEntity != null) {
+			entityManager.remove(locationEntity);
+		}
 	}
 }

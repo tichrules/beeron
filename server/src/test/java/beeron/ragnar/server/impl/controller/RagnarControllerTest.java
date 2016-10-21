@@ -9,7 +9,7 @@ import beeron.ragnar.common.RagnarService;
 
 public class RagnarControllerTest {
 
-	private RagnarController ragnarController;
+	private RagnarWebController ragnarController;
 
 	private RagnarService ragnarService;
 	private Model model;
@@ -18,7 +18,7 @@ public class RagnarControllerTest {
 	public void setup() {
 		ragnarService = Mockito.mock(RagnarService.class);
 		model = Mockito.mock(Model.class);
-		ragnarController = new RagnarController(ragnarService);
+		ragnarController = new RagnarWebController(ragnarService);
 	}
 
 	@Test

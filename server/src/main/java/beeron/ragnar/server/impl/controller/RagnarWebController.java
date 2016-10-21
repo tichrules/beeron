@@ -16,11 +16,11 @@ import beeron.ragnar.server.impl.form.PersonForm;
 
 @Component
 @RequestMapping("/ragnar")
-public class RagnarController {
+public class RagnarWebController {
 
 	private RagnarService ragnarService;
 
-	public RagnarController(RagnarService ragnarService) {
+	public RagnarWebController(RagnarService ragnarService) {
 		this.ragnarService = ragnarService;
 	}
 
